@@ -28,6 +28,23 @@ pygame.display.update()
 pygame.display.set_icon(pygame.image.load("images/icon.png"))
 # set the clock
 setclock = pygame.time.Clock()
+# set the PyTux FPS
+FPS = 60
+# set the PyTux background
+color = (173, 216, 230)
+screen.fill(color)
+# set the PyTux text
+textcolor = (0, 0, 0)
+def text(text, x, y, textcolor, size):
+    font = pygame.font.SysFont("Arial", size)
+    text = font.render(text, True, textcolor)
+    screen.blit(text, (x, y))
+# set the PyTux text
+text("Welcome to PyTux!", 190, 10, (0, 0, 0), 30)
+
+
+
+pygame.display.flip()
 
 # pygame.mixer.init()
 maintheme = pygame.mixer.Sound("sounds/maintheme.ogg")
