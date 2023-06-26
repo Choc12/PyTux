@@ -28,6 +28,7 @@ pygame.display.update()
 pygame.display.set_icon(pygame.image.load("images/icon.png"))
 # set the clock
 setclock = pygame.time.Clock()
+
 # set the PyTux FPS
 FPS = 60
 # set the PyTux background
@@ -41,6 +42,42 @@ def text(text, x, y, textcolor, size):
     screen.blit(text, (x, y))
 # set the PyTux text
 text("Welcome to PyTux!", 190, 10, (0, 0, 0), 30)
+
+# button to start the game
+startbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 200, 150, 50))
+text("Start", 300, 210, (255, 255, 255), 30)
+# when the start button is pressed
+whenstartbutton = pygame.mouse.get_pressed()
+if whenstartbutton[0]:
+    
+    # play the game
+    whenstartbutton = False
+    print("Playing the game...")
+    # quit PyTux
+    pygame.quit()
+    # run the game
+    exec(open("game.py").read())
+# button to quit PyTux
+quitbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 300, 150, 50))
+text("Quit", 300, 310, (255, 255, 255), 30)
+# when the quit button is pressed
+whenquitbutton = pygame.mouse.get_pressed()
+if whenquitbutton[0]:
+    # quit PyTux
+    whenquitbutton = False
+    print("Quitting PyTux...")
+    pygame.quit()
+    sys.exit()
+# button to go view the credits
+creditsbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 400, 150, 50))
+text("Credits", 300, 410, (255, 255, 255), 30)
+# when the credits button is pressed
+whencreditsbutton = pygame.mouse.get_pressed()
+if whencreditsbutton[0]:
+    # open Credits file
+    whencreditsbutton = False
+    print("Opening Credits file...")
+    exec(open("Credits").read())
 
 
 
@@ -59,3 +96,4 @@ while running:
             running = False
 # quit PyTux
 pygame.quit()
+print("Quitting PyTux...")
