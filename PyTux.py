@@ -12,15 +12,26 @@ print("PyTux is currently in version 0.0.0.")
 print("PyTux is licensed under the GNU GPL v3.")
 print("PyTux is made by the PyTux Team.(currently only Choc12.)")
 print("PyTux is made in Python 3.10.6.")
-print("PyTux is made in Pygame 2.5.2.")
+print("PyTux is made in Pygame 2.5.0.")
 print("PyTux is made in Pop!_OS 22.04.")
 
 # pygame.init()
-pygame.init(), pygame.display.set_mode((640, 480), pygame.RESIZABLE), pygame.display.set_caption("PyTux")
-pygame.display.flip(), pygame.display.update(), pygame.display.set_icon(pygame.image.load("images/icon.png"))
+pygame.init()
+# set the PyTux window
+screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
+# set the PyTux window title
+pygame.display.set_caption("PyTux")
+pygame.display.flip() 
+# update the PyTux window
+pygame.display.update()
+# set the PyTux window icon
+pygame.display.set_icon(pygame.image.load("images/icon.png"))
+# set the clock
+setclock = pygame.time.Clock()
 
 # pygame.mixer.init()
 maintheme = pygame.mixer.Sound("sounds/maintheme.ogg")
+# play the main theme
 maintheme.play()
 
 # main loop
