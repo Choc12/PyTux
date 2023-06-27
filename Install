@@ -5,8 +5,11 @@ PYTHON REQUIREMENTS
 - Sys
 - Pygame Widgets
 - Python 3.11(Of course)
--------------------------
+--------------------------
 
 RUNNING THE GAME
 Just Run It From Vscode
-Or From Your Command Line
+Or From Your Command Line.
+If You Want To Start From 
+The First Level Start From
+Game.py.
