@@ -1,19 +1,22 @@
 # import pygame
 import pygame
+# import pygame_widgets
+import pygame_widgets
 # import sys
 import sys
 
 # print the PyTux info
 print("Welcome to PyTux!")
-print("PyTux is a Pygame-based game for Linux.")
+print("PyTux is a Pygame-based game for Linux, Windows And MacOS.")
 print("PyTux is a game about Tux, the Linux mascot, and his adventures.")
 print("PyTux is currently in development.")
 print("PyTux is currently in version 0.0.0.")
 print("PyTux is licensed under the GNU GPL v3.")
 print("PyTux is made by the PyTux Team.(currently only Choc12.)")
-print("PyTux is made in Python 3.10.6.")
+print("PyTux is made in Python 3.11.4.")
 print("PyTux is made in Pygame 2.5.0.")
-print("PyTux is made in Pop!_OS 22.04.")
+print("PyTux is made in Visual Studio Code 1.79.2.")
+print("PyTux is made in Windows 10.")
 
 # pygame.init()
 pygame.init()
@@ -41,7 +44,7 @@ def text(text, x, y, textcolor, size):
     text = font.render(text, True, textcolor)
     screen.blit(text, (x, y))
 # set the PyTux text
-text("Welcome to PyTux!", 190, 10, (0, 0, 0), 30)
+text("Welcome to PyTux!", 225, 10, (0, 0, 0), 30)
 
 # button to start the game
 startbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 200, 150, 50))
@@ -49,7 +52,6 @@ text("Start", 300, 210, (255, 255, 255), 30)
 # when the start button is pressed
 whenstartbutton = pygame.mouse.get_pressed()
 if whenstartbutton[0]:
-    
     # play the game
     whenstartbutton = False
     print("Playing the game...")
@@ -64,7 +66,7 @@ text("Quit", 300, 310, (255, 255, 255), 30)
 whenquitbutton = pygame.mouse.get_pressed()
 if whenquitbutton[0]:
     # quit PyTux
-    whenquitbutton = False
+    whenquitbutton = True
     print("Quitting PyTux...")
     pygame.quit()
     sys.exit()
@@ -81,13 +83,14 @@ if whencreditsbutton[0]:
 
 
 
-pygame.display.flip()
+
 
 # pygame.mixer.init()
 maintheme = pygame.mixer.Sound("sounds/maintheme.ogg")
 # play the main theme
 maintheme.play()
 
+pygame.display.update()
 # main loop
 running = True
 while running:

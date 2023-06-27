@@ -1,7 +1,9 @@
 Currently, You Need A Computer To Run This Program
 
 PYTHON REQUIREMENTS
-- Pygame And Sys
+- Pygame
+- Sys
+- Pygame Widgets
 - Python 3.11(Of course)
 -------------------------
 
