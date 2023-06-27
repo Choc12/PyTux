@@ -43,9 +43,11 @@ def text(text, x, y, textcolor, size):
     font = pygame.font.SysFont("Arial", size)
     text = font.render(text, True, textcolor)
     screen.blit(text, (x, y))
+# show the PyTux Logo
+logo = pygame.image.load("images/logo.png")
+screen.blit(logo, (500, 100))
 # set the PyTux text
 text("Welcome to PyTux!", 500, 10, (0, 0, 0), 30)
-
 # button to start the game
 startbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 200, 150, 50))
 text("Start", 300, 210, (255, 255, 255), 30)
