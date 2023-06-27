@@ -3,7 +3,7 @@ import sys
 print("Loading PyTux...")
 print("You are in Level 1: Tuxtorial.")
 pygame.init()
-screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
+screen = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
 pygame.display.set_caption("PyTux")
 pygame.display.flip()
 pygame.display.update()

@@ -21,7 +21,7 @@ print("PyTux is made in Windows 10.")
 # pygame.init()
 pygame.init()
 # set the PyTux window
-screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
+screen = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
 # set the PyTux window title
 pygame.display.set_caption("PyTux")
 pygame.display.flip() 
@@ -44,7 +44,7 @@ def text(text, x, y, textcolor, size):
     text = font.render(text, True, textcolor)
     screen.blit(text, (x, y))
 # set the PyTux text
-text("Welcome to PyTux!", 225, 10, (0, 0, 0), 30)
+text("Welcome to PyTux!", 500, 10, (0, 0, 0), 30)
 
 # button to start the game
 startbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 200, 150, 50))
@@ -80,6 +80,16 @@ if whencreditsbutton[0]:
     whencreditsbutton = False
     print("Opening Credits file...")
     exec(open("Credits").read())
+# button to go view the license
+licensebutton = pygame.draw.rect(screen, (0, 0, 0), (250, 500, 150, 50))
+text("License", 300, 510, (255, 255, 255), 30)
+# when the license button is pressed
+whenlicensebutton = pygame.mouse.get_pressed()
+if whenlicensebutton[0]:
+    # open License file
+    whenlicensebutton = False
+    print("Opening License file...")
+    exec(open("Copying").read())
 
 
 
@@ -88,7 +98,8 @@ if whencreditsbutton[0]:
 # pygame.mixer.init()
 maintheme = pygame.mixer.Sound("sounds/maintheme.ogg")
 # play the main theme
-maintheme.play()
+maintheme.play(loops=-1)
+# loop the main theme
 
 pygame.display.update()
 # main loop
