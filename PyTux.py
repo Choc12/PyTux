@@ -1,3 +1,19 @@
+# by Choc12
+
+## GPLv3
+# This program is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 # import pygame
 import pygame
 # import pygame_widgets
@@ -60,7 +76,7 @@ if whenstartbutton[0]:
     # quit PyTux
     pygame.quit()
     # run the game
-    exec(open("game.py").read())
+    exec(open("level1.py").read())
 # button to quit PyTux
 quitbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 300, 150, 50))
 text("Quit", 300, 310, (255, 255, 255), 30)
