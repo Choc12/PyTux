@@ -18,6 +18,7 @@
 import pygame
 # import pygame_widgets
 import pygame_widgets
+from pygame_widgets.button import Button
 # import sys
 import sys
 
@@ -65,28 +66,43 @@ screen.blit(logo, (500, 100))
 # set the PyTux text
 text("Welcome to PyTux!", 500, 10, (0, 0, 0), 30)
 # button to start the game
-startbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 200, 150, 50))
-text("Start", 300, 210, (255, 255, 255), 30)
+button = Button(
+    screen, 250, 200, 150, 50, text='Start', fontSize=30,
+    margin=20,
+    inactiveColour=(0, 0, 0),
+    pressedColour=(255, 0, 0),
+    radius=20,
+    onClick=lambda: print('Click')
+)
 # when the start button is pressed
-whenstartbutton = pygame.mouse.get_pressed()
-if whenstartbutton[0]:
-    # play the game
-    whenstartbutton = False
-    print("Playing the game...")
-    # quit PyTux
-    pygame.quit()
-    # run the game
+whenbutton = pygame.mouse.get_pressed()
+if whenbutton[0]:
+    # start the game
+    whenbutton = True
+    print("Starting PyTux...")
+    exec(open("level1.py").read())
+# press enter to start the game
+whenenter = pygame.key.get_pressed()
+if whenenter[pygame.K_RETURN]:
+    # start the game
+    whenenter = False
+    print("Starting PyTux...")
     exec(open("level1.py").read())
 # button to quit PyTux
-quitbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 300, 150, 50))
-text("Quit", 300, 310, (255, 255, 255), 30)
+quitbutton = Button(
+    screen, 250, 300, 150, 50, text='Quit', fontSize=30,
+    margin=20,
+    inactiveColour=(0, 0, 0),
+    pressedColour=(255, 0, 0),
+    radius=20,
+    onClick=lambda: print('Click')
+)
 # when the quit button is pressed
 whenquitbutton = pygame.mouse.get_pressed()
 if whenquitbutton[0]:
     # quit PyTux
-    whenquitbutton = True
+    whenquitbutton = False
     print("Quitting PyTux...")
-    pygame.quit()
     sys.exit()
 # button to go view the credits
 creditsbutton = pygame.draw.rect(screen, (0, 0, 0), (250, 400, 150, 50))

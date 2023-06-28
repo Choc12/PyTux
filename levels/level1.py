@@ -16,6 +16,61 @@
 
 import pygame
 
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load("images/tux.png")
+        self.rect = self.image.get_rect()
+        self.rect.x = 0
+        self.rect.y = 0
+        self.xvel = 0
+        self.yvel = 0
+        self.onGround = False
+        self.jump = False
+        self.jumpHeight = 10
+        self.jumpCount = 0
+        self.gravity = 0.5
+        self.speed = 5
+        self.jumpSound = pygame.mixer.Sound("sounds/jump.wav")
+        self.jumpSound.set_volume(0.5)
+        self.jumpSound.play()
+        self.jumpSound.fadeout(1000)
+        self.jumpSound.stop()
+        screen.blit(self.image, self.rect)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            self.xvel = -self.speed
+        if keys[pygame.K_RIGHT]:
+            self.xvel = self.speed
+        if keys[pygame.K_UP]:
+            self.jump = True
+        if keys[pygame.K_DOWN]:
+            self.yvel = self.speed
+        if not self.onGround:
+            self.yvel += self.gravity
+        self.rect.x += self.xvel
+        self.rect.y += self.yvel
+        if self.jump:
+            if self.jumpCount < self.jumpHeight:
+                self.yvel = -self.speed
+                self.jumpCount += 1
+            else:
+                self.jump = False
+                self.jumpCount = 0
+        if self.rect.bottom > 720:
+            self.rect.bottom = 720
+            self.onGround = True
+            self.yvel = 0
+        if self.rect.top < 0:
+            self.rect.top = 0
+            self.yvel = 0
+        if self.rect.left < 0:
+            self.rect.left = 0
+            self.xvel = 0
+        if self.rect.right > 1280:
+            self.rect.right = 1280
+            self.xvel = 0
+        screen.blit(self.image, self.rect)
 
 class TileMap():
     def __init__(self, tilesize):
@@ -63,25 +118,7 @@ clock = pygame.time.Clock()
 pygame.mixer.music.load("sounds/chipdisko.ogg")
 pygame.mixer.music.play(-1)
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("images/tux.png")
-        self.rect = self.image.get_rect()
-        self.rect.x = 0
-        self.rect.y = 0
-        self.xvel = 0
-        self.yvel = 0
-        self.onGround = False
-        player = Player()
-        player.rect.x = 0
-        player.rect.y = 0
-        player_list = pygame.sprite.Group()
-        player_list.add(player)
-        screen.blit(player.image, player.rect)
-        player_list.draw(screen)
-        pygame.display.flip()
-        clock.tick(60)
+
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
