@@ -14,15 +14,6 @@ setclock = pygame.time.Clock()
 FPS = 60
 color = (173, 216, 230)
 screen.fill(color)
-levelformat = open("levels/level1.lvl", "r")
-level = levelformat.read()
-format = level.split("\n")
-for i in range(len(format)):
-    for j in range(len(format[i])):
-        if format[i][j] == "X":
-            pygame.draw.rect(screen, (255, 255, 255), (j * 32, i * 32, 32, 32))
-            tile = pygame.draw.rect(screen, (0, 0, 0), (j * 32, i * 32, 32, 32), 1)
-pygame.draw.rect(screen, (0, 0, 0), (250, 200, 150, 50))
 
 
 player = pygame.sprite.Sprite()
