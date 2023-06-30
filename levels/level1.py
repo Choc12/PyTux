@@ -15,62 +15,44 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygame
+import sys
+import os
+from typing import Tuple
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("images/tux.png")
-        self.rect = self.image.get_rect()
-        self.rect.x = 0
-        self.rect.y = 0
-        self.xvel = 0
-        self.yvel = 0
-        self.onGround = False
-        self.jump = False
-        self.jumpHeight = 10
-        self.jumpCount = 0
-        self.gravity = 0.5
-        self.speed = 5
-        self.jumpSound = pygame.mixer.Sound("sounds/jump.wav")
-        self.jumpSound.set_volume(0.5)
-        self.jumpSound.play()
-        self.jumpSound.fadeout(1000)
-        self.jumpSound.stop()
-        screen.blit(self.image, self.rect)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.xvel = -self.speed
-        if keys[pygame.K_RIGHT]:
-            self.xvel = self.speed
-        if keys[pygame.K_UP]:
-            self.jump = True
-        if keys[pygame.K_DOWN]:
-            self.yvel = self.speed
-        if not self.onGround:
-            self.yvel += self.gravity
-        self.rect.x += self.xvel
-        self.rect.y += self.yvel
-        if self.jump:
-            if self.jumpCount < self.jumpHeight:
-                self.yvel = -self.speed
-                self.jumpCount += 1
-            else:
-                self.jump = False
-                self.jumpCount = 0
-        if self.rect.bottom > 720:
-            self.rect.bottom = 720
-            self.onGround = True
-            self.yvel = 0
-        if self.rect.top < 0:
-            self.rect.top = 0
-            self.yvel = 0
-        if self.rect.left < 0:
-            self.rect.left = 0
-            self.xvel = 0
-        if self.rect.right > 1280:
-            self.rect.right = 1280
-            self.xvel = 0
-        screen.blit(self.image, self.rect)
+        pygame.sprite.Sprite.__init__(self)
+        self.movex = 0
+        self.movey = 0
+        self.frame = 0
+        self.images = []
+        for i in range(1, 7):
+            img = pygame.image.load(os.path.join('images/tux/small', 'walk-' + str(i) + '.png')).convert()
+            img.convert_alpha()
+            img.set_colorkey(pygame.color.Color("white"))
+            self.images.append(img)
+            self.image = self.images[0]
+            self.rect = self.image.get_rect()
+
+    def control(self, x, y):
+        self.movex += x
+        self.movey += y
+
+    def update(self):
+        self.rect.x = self.rect.x + self.movex
+        self.rect.y = self.rect.y + self.movey
+
+        if self.movex < 0:
+            self.frame += 1
+            if self.frame > 5*ani:
+                self.frame = 0
+            self.image = self.images[self.frame//ani]
+        if self.movex > 0:
+            self.frame += 1
+            if self.frame > 5*ani:
+                self.frame = 0
+            self.image = self.images[self.frame//ani]
+        
 
 class TileMap():
     def __init__(self, tilesize):
@@ -107,6 +89,8 @@ pygame.init()
 
 tm = TileMap(32)
 
+ani = 4
+
 screen = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
 pygame.display.set_caption("PyTux")
 pygame.display.set_icon(pygame.image.load("images/icon.png"))
@@ -127,6 +111,11 @@ while not done:
     screen.fill(pygame.color.Color("lightblue"))
 
     tm.drawMap(screen, (0,0))
+
+    Player()
+    
+    Player_list = pygame.sprite.Group()
+    Player_list.add(Player)
 
 
     pygame.display.flip()
